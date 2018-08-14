@@ -1,0 +1,36 @@
+body {
+  font-size: large;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+}
+
+.home {
+  text-align: center;
+}
+
+.home-logo {
+  animation: home-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.home-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.home-intro {
+  font-size: large;
+}
+
+@keyframes home-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
