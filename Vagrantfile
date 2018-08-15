@@ -15,8 +15,6 @@ sudo apt-get install -y git
 
 sudo apt-get install -y yarn
 
-npm install -g typescript --no-bin-links
-
 SCRIPT
 
 Vagrant.configure("2") do |config|
@@ -29,9 +27,10 @@ Vagrant.configure("2") do |config|
         vb.customize ["modifyvm", :id, "--cpus", 16]
         vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
         vb.customize ["modifyvm", :id, "--uartmode1", "disconnected"]
+        vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
     end 
 
-    config.vm.network "forwarded_port", guest: 3000, host: 9000
+    config.vm.network "forwarded_port", guest: 3000, host: 3000
     config.vm.network "private_network", ip: "192.168.50.10"
 
     config.vm.provision "shell", inline: $prov_script  
