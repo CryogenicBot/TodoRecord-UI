@@ -6,8 +6,6 @@ interface IProps {
 }
 export class Hello extends React.Component<IProps, {}> {
   render() {
-    return <h1>
-      this is just a test
-      </h1>
+    return <h1>hello world</h1>
   }
 }
