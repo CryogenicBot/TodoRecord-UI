@@ -1,6 +1,7 @@
 const path = require('path'),
   webpack = require('webpack'),
   HtmlWebpackPlugin = require('html-webpack-plugin');
+TSLintPlugin = require('tslint-webpack-plugin');
 
 module.exports = {
   context: __dirname,
@@ -19,21 +20,62 @@ module.exports = {
   },
   module: {
     rules: [
+      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
       {
-        test: /\.(ts|tsx)$/,
-        loader: 'ts-loader'
-      },
-      { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+        oneOf: [
+          {
+            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+            loader: require.resolve('url-loader'),
+            options: {
+              limit: 10000,
+              name: 'static/media/[name].[hash:8].[ext]',
+            },
+          },
+          {
+            test: /\.(ts|tsx)$/,
+            loader: 'ts-loader',
+            exclude: /node_modules/,
+          },
+          {
+            test: /\.css$/,
+            use: [
+              {
+                loader: "style-loader"
+              },
+              {
+                loader: 'typings-for-css-modules-loader',
+                options: {
+                  modules: true,
+                  namedExport: true,
+                  camelCase: true
+                }
+              }
+            ]
+          },
+          {
+            exclude: [/\.js$/, /\.html$/, /\.json$/],
+            loader: require.resolve('file-loader'),
+            options: {
+              name: 'static/media/[name].[hash:8].[ext]',
+            },
+          }
+        ]
+      }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'src', 'app', 'index.html') }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new TSLintPlugin({
+      files: ['./src/**/*.tsx']
+    })
   ],
   devServer: {
     compress: true,
     port: 3000,
     host: '192.168.50.10',
-    hot: true
+    hot: true,
+    historyApiFallback: true,
+    contentBase: path.join(__dirname, 'build')
   }
 }
