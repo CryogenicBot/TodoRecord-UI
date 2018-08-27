@@ -1,7 +1,7 @@
 const path = require('path'),
-  webpack = require('webpack'),
-  HtmlWebpackPlugin = require('html-webpack-plugin');
-TSLintPlugin = require('tslint-webpack-plugin');
+      webpack = require('webpack'),
+      HtmlWebpackPlugin = require('html-webpack-plugin');
+      TSLintPlugin = require('tslint-webpack-plugin');
 
 module.exports = {
   context: __dirname,
@@ -25,7 +25,7 @@ module.exports = {
         oneOf: [
           {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
-            loader: require.resolve('url-loader'),
+            loader: 'url-loader',
             options: {
               limit: 10000,
               name: 'static/media/[name].[hash:8].[ext]',
@@ -38,6 +38,22 @@ module.exports = {
           },
           {
             test: /\.css$/,
+            exclude: [/src/],
+            use: [
+              {
+                loader: 'style-loader'
+              },
+              {
+                loader: 'css-loader',
+                options: {
+                  importLoaders: 1,
+                }
+              }
+            ]
+          },
+          {
+            test: /\.css$/,
+            exclude: [/node_modules/],
             use: [
               {
                 loader: "style-loader"
@@ -47,14 +63,15 @@ module.exports = {
                 options: {
                   modules: true,
                   namedExport: true,
-                  camelCase: true
+                  camelCase: true,
+                  localIdentName: "[name]__[local]_[hash:base64:8]"
                 }
               }
             ]
           },
           {
             exclude: [/\.js$/, /\.html$/, /\.json$/],
-            loader: require.resolve('file-loader'),
+            loader: 'file-loader',
             options: {
               name: 'static/media/[name].[hash:8].[ext]',
             },
