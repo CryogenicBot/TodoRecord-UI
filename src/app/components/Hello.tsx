@@ -3,6 +3,7 @@ import API from '../Api';
 
 import { Button, Intent, Spinner } from "@blueprintjs/core";
 
+import * as styles from './Hello.css';
 
 export class Hello extends React.Component<{}, {}> {
 
@@ -20,8 +21,8 @@ export class Hello extends React.Component<{}, {}> {
     return <div>
       <h1>hello world</h1>
       <form className="input-form" onSubmit={this.handleSubmit}>
-        <input className="submit-button" type="submit" value="Submit" />
-        <Button icon="refresh" />
+        <input className={styles.submitButton} type="submit" value="Submit" />
+        <Button icon="refresh" intent={Intent.PRIMARY}/>
       </form>
     </div>
 
