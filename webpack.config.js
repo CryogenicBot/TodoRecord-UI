@@ -6,7 +6,7 @@ const path = require('path'),
 module.exports = {
   context: __dirname,
   entry: {
-    app: ['./src/app/App.tsx'],
+    app: ['./src/app/app.tsx'],
     vendor: ['react', 'react-dom']
   },
   mode: 'development',

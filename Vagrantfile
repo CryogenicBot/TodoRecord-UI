@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
     config.vm.provider "virtualbox" do |vb|
         vb.gui = false
         vb.customize ["modifyvm", :id, "--memory", "16384"]
-        vb.customize ["modifyvm", :id, "--cpus", 16]
+        vb.customize ["modifyvm", :id, "--cpus", 8]
         vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
         vb.customize ["modifyvm", :id, "--uartmode1", "disconnected"]
         vb.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
