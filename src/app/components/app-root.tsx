@@ -8,13 +8,15 @@ import Loadable from 'react-loadable';
 import Login from './login/login';
 import Loading from './general/loading/loading';
 import rootReducer from '../state-management/reducers/app-reducer';
+import AuthWrapper from './auth-wrapper/auth-wrapper';
+import Dashboard from './dashboard/dashboard';
 
 export interface AppState {
   userId: number
 };
 
 const initialState: AppState = {
-  userId: 0
+  userId: -1
 };
 
 const store = createStore<AppState, AnyAction, null, null>(rootReducer, initialState);
@@ -36,6 +38,7 @@ class AppRoot extends Component {
           <BrowserRouter>
             <Switch>
               <Route exact={true} path="/login" component={Login} />
+              <Route path="/home" component={AuthWrapper(Dashboard)} />
               <Route component={PageDoesNotExist} />
             </Switch>
           </BrowserRouter>
