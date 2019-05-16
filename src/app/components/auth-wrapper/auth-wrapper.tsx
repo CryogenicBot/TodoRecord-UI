@@ -8,15 +8,15 @@ interface AuthenticatedProps {
   isAuthenticated: boolean
 };
 
-function AuthWrapper<P extends object>(Component: React.ComponentType<P>) {
-  class AuthenticatedComponent extends React.Component<P & AuthenticatedProps> {
+function AuthWrapper<P extends object>(Component: React.ComponentType<P>, props: P) {
+  class AuthenticatedComponent extends React.Component<AuthenticatedProps, {}> {
     render() {
-      const { isAuthenticated, ...props } = this.props as AuthenticatedProps;
+      const { isAuthenticated } = this.props as AuthenticatedProps;
       return <Route
         {...props}
         render={rProps =>
           isAuthenticated ? (
-            <Component {...props} />
+            <Component {...props as P} />
           ) : (
               <Redirect
                 to={{

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router';
 import { Provider } from 'react-redux';
 import { createStore, AnyAction } from 'redux';
 import Loadable from 'react-loadable';
@@ -38,7 +39,7 @@ class AppRoot extends Component {
           <BrowserRouter>
             <Switch>
               <Route exact={true} path="/login" component={Login} />
-              <Route path="/home" component={AuthWrapper(Dashboard)} />
+              <Route path="/home" component={AuthWrapper(Dashboard, {})} />
               <Route component={PageDoesNotExist} />
             </Switch>
           </BrowserRouter>
