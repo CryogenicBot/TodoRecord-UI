@@ -39,7 +39,7 @@ class AppRoot extends Component {
           <BrowserRouter>
             <Switch>
               <Route exact={true} path="/login" component={Login} />
-              <Route path="/home" component={AuthWrapper(Dashboard, {})} />
+              <Route path="/home" component={Dashboard} />
               <Route component={PageDoesNotExist} />
             </Switch>
           </BrowserRouter>
